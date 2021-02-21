@@ -12,6 +12,7 @@ shopify_ORDERS = shopify_URL+"/api/2021/01/orders.json"
 shopify_ORDER_URL = 'https://swosh3d.myshopify.com/admin/api/2021-01/orders.json'
 
 username = 'swoshop'
+password = 'cPcQXHj(%vT2K?p'
 instagram = Client(username, password)
 
 def credit(url, username, password):
@@ -33,8 +34,10 @@ def check_orders():
             return new_order(True, orders, order_title)
             
 def new_order(trlse, orders, title):
-    new_bio = "Commandes: %s" % len(orders)
-    instagram.edit_profile(first_name="Swosh", biography=new_bio, external_url="https://swosh.ch/", email="info@swosh.ch", phone_number="0", gender="3")
+    new_bio = "Commandes: %s" % len(orders["orders"])
+    print(type(new_bio))
+    instagram.edit_profile(first_name="Swosh", biography=new_bio, external_url="https://swosh.ch/", email="info@swosh.ch", phone_number="+41761234567", gender=3)
+    print("Changé la bio Instagram en %s" % new_bio)
     print("Nouvelle commande: %s" % title)
     check_orders()
 
