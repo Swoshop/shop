@@ -29,7 +29,7 @@ def check_orders():
         previous_len = len(orders["orders"])
         while True:
             orders = json.loads(urllib.request.urlopen(shopify_ORDER_URL).read())
-            sleep("salut")
+            sleep(1)
             if len(orders["orders"]) > previous_len: 
                 order_title = orders["orders"][0]["line_items"][0]["title"]
                 return new_order(True, orders, order_title)
