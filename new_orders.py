@@ -23,16 +23,21 @@ def credit(url, username, password):
     urllib.request.install_opener(opener)
 
 def check_orders():
-    print("...")
-    orders = json.loads(urllib.request.urlopen(shopify_ORDER_URL).read())
-    previous_len = len(orders["orders"])
-    while True:
+    try:
+        print("...")
         orders = json.loads(urllib.request.urlopen(shopify_ORDER_URL).read())
-        sleep(1)
-        if len(orders["orders"]) > previous_len: 
-            order_title = orders["orders"][0]["line_items"][0]["title"]
-            return new_order(True, orders, order_title)
-            
+        previous_len = len(orders["orders"])
+        while True:
+            orders = json.loads(urllib.request.urlopen(shopify_ORDER_URL).read())
+            sleep("salut")
+            if len(orders["orders"]) > previous_len: 
+                order_title = orders["orders"][0]["line_items"][0]["title"]
+                return new_order(True, orders, order_title)
+
+    except Exception as err:
+        print("An error occured, retrying...")
+        check_orders()
+
 def new_order(trlse, orders, title):
     new_bio = "Commandes: %s" % len(orders["orders"])
     print(type(new_bio))
